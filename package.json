@@ -1,0 +1,25 @@
+{
+  "name": "dvp-common-lite",
+  "version": "1.0.0",
+  "description": "basic version of dvp common",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DuoSoftware/DVP-Common-Lite.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DuoSoftware/DVP-Common-Lite/issues"
+  },
+  "homepage": "https://github.com/DuoSoftware/DVP-Common-Lite#readme",
+  "dependencies": {
+    "config": "^1.28.1",
+    "ioredis": "^3.2.2",
+    "winston": "^2.4.0",
+    "winston-logstash-udp": "^0.2.1"
+  }
+}
