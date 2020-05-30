@@ -1,7 +1,7 @@
 var redis = require("ioredis");
 var config = require("config");
 var util = require("util");
-var resource = config.Host.resource;
+//var resource = config.Host.resource;
 //change and modify the secret
 
 var redisip = config.Security.ip;
@@ -85,16 +85,33 @@ var Secret = function (req, payload, done) {
   if (payload && payload.iss && payload.jti) {
     var issuer = payload.iss;
     var jti = payload.jti;
+    ////////////////this is just for testing///////////////////
+    //req.user = payload;
 
-    redisClient.get("token:iss:" + issuer + ":" + jti, function (err, key) {
-      if (err) {
-        return done(err);
-      }
-      if (!key) {
+    redisClient
+      .multi()
+      .get(`token:iss:${issuer}:${jti}`)
+      .get(`claims:iss:${issuer}:${jti}`)
+      .exec(function (err, results) {
+        if (err) {
+          return done(err);
+        }
+        if (results && Array.isArray(results) && results.length > 1) {
+          if (results[1][0] == null) {
+            try {
+              req.scope = JSON.parse(results[1][1]);
+            } catch (ex) {
+              return done(new Error("scope_error"));
+            }
+          }
+          if (results[0][0] == null) {
+            return done(null, results[0][1]);
+          } else {
+            return done(new Error("missing_secret"));
+          }
+        }
         return done(new Error("missing_secret"));
-      }
-      return done(null, key);
-    });
+      });
   } else {
     done(new Error("wrong token format"));
   }
