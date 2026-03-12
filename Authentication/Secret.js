@@ -1,6 +1,5 @@
 var redis = require("ioredis");
 var config = require("config");
-var util = require("util");
 //var resource = config.Host.resource;
 //change and modify the secret
 
@@ -128,11 +127,7 @@ var CompanyChatSecret = function (req, payload, done) {
     var issuer = payload.iss;
     var jti = payload.jti;
 
-    var chatKey = util.format(
-      "%d:%d:keys:chat:public",
-      payload.tenant,
-      payload.company
-    );
+    var chatKey = `${payload.tenant}:${payload.company}:keys:chat:public`;
 
     redisClient.get(chatKey, function (err, key) {
       if (err) {

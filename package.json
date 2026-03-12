@@ -17,9 +17,9 @@
   },
   "homepage": "https://github.com/DuoSoftware/DVP-Common-Lite#readme",
   "dependencies": {
-    "config": "^1.28.1",
-    "ioredis": "^3.2.2",
-    "winston": "^2.4.0",
-    "winston-logstash-udp": "^0.2.1"
+    "config": "^3.3.3",
+    "ioredis": "^5.3.2",
+    "winston": "^3.11.0",
+    "winston-transport": "^4.7.0"
   }
 }
