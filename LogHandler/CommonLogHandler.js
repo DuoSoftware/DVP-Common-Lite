@@ -79,6 +79,7 @@ if (process.env.SYS_LOG_HOST && process.env.SYS_LOG_PORT) {
 var logger = winston.createLogger({
   level: level,
   format: winston.format.combine(
+    winston.format.splat(),
     winston.format.colorize(),
     winston.format.simple(),
   ),
